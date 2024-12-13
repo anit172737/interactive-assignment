@@ -188,7 +188,7 @@ const UserForm = () => {
 
                 {errors[field.name] && (
                   <p style={{ color: "orange" }}>
-                    <>{errors[field.name]?.message as unknown}</>
+                    <>{errors[field.name]?.message as string}</>
                   </p>
                 )}
               </div>
