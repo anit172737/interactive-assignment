@@ -11,6 +11,7 @@ import {
   emailRegex,
   mobileRegex,
   handleAllowAll,
+  nameRegex,
 } from "@/app/utils/helperFunctions";
 
 // const customStyles = {
@@ -89,6 +90,7 @@ const UserForm = () => {
       type: "allowAll",
       inputType: "input",
       required: true,
+      pattern: { value: nameRegex, message: "Enter valid name." },
     },
     {
       name: "email",
@@ -118,13 +120,16 @@ const UserForm = () => {
     },
   ];
   const onSubmit = async (data: any) => {
-    console.log("data", data);
     const { name, email, phoneNumber, message } = data;
-    const string = `Name : ${name.trim()}, Email : ${email.trim()}, Phone Number : ${phoneNumber.trim()} ${
-      message && ", Message :" + message.trim()
+    const string = `Name : ${name.trim()},\nEmail : ${email.trim()},\nPhone Number : ${phoneNumber.trim()}${
+      message ? `,\nMessage : ${message.trim()}` : ""
     }`;
     await alert(string);
-    reset();
+
+    setValue("name", "");
+    setValue("email", "");
+    setValue("phoneNumber", "");
+    setValue("message", "");
   };
 
   return (
@@ -171,11 +176,11 @@ const UserForm = () => {
                       })}
                       placeholder={`Enter ${field.placeholder}`}
                       autoFocus={field.name === "name" ? true : false}
-                      onKeyDown={
-                        field.type === "allowAll"
-                          ? handleAllowAll
-                          : handleOnlyNumbers
-                      }
+                      // onKeyDown={
+                      //   field.type === "allowAll"
+                      //     ? handleAllowAll
+                      //     : handleOnlyNumbers
+                      // }
                     />
                   )}
                 </>

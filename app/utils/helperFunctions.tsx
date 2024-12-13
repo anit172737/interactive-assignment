@@ -1,7 +1,9 @@
 // import { specialCharacterNotAllowed, onlyNumbersAllowed } from "./utils";
 
-export const emailRegex =
-  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+export const nameRegex = /^[a-zA-Z]+([ '-][a-zA-Z]+)*$/;
+export const emailRegex = /^\S+@\S+\.\S+$/;
+// export const emailRegex =
+//   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 export const mobileRegex = /^[6-9]\d{9}$/;
 export const specialCharacterNotAllowed = /^[a-zA-Z0-9]*$/;
 export const onlyNumbersAllowed = /^[0-9]$/;
