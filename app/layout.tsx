@@ -19,7 +19,7 @@ export default function RootLayout({
       <body className={`${outfit.className}`}>
         <div className="layout-container">
           <Sidebar />
-          {children}
+          <div className="layout-container-child">{children}</div>
         </div>
       </body>
     </html>

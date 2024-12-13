@@ -4,5 +4,9 @@
     grid-auto-flow: column;
     grid-template-columns: 220px 1fr;
     height: 100vh;
+
+    &-child {
+      padding: 0px 30px 30px;
+    }
   }
 }

@@ -1,0 +1,22 @@
+@import "../base";
+
+.commonHeader {
+  height: min-content;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 2fr 1fr;
+  align-self: center;
+  position: sticky;
+  padding: 20px 0px;
+  top: 0;
+  z-index: 100;
+  left: 0;
+  backdrop-filter: blur(20px);
+
+  &_top {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: max-content 1fr;
+    gap: 30px;
+  }
+}

@@ -1,0 +1,78 @@
+@import "../base";
+
+.userForm {
+  display: grid;
+  grid-template-rows: 80px 1fr;
+  height: 100%;
+
+  &-content {
+    display: grid;
+    justify-content: center;
+    align-content: start;
+    height: 100%;
+    background-color: $color-ternary;
+    border-radius: 10px;
+    padding: 30px;
+    align-content: center;
+
+    &-form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 35px;
+      row-gap: 20px;
+      width: 100%;
+
+      &-field {
+        display: grid;
+        grid-template-rows: min-content min-content 7px;
+
+        span {
+          color: orangered;
+        }
+        input {
+          height: 40px;
+          min-width: 350px;
+          background: $color-secondary;
+          border: none;
+          border-radius: 5px;
+          padding-left: 10px;
+        }
+
+        textarea {
+          min-height: 100px;
+          max-width: 350px;
+          min-width: 350px;
+          background: $color-secondary;
+          border: none;
+          border-radius: 5px;
+          padding: 10px;
+        }
+      }
+    }
+
+    &-footer {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding-top: 10px;
+
+      &-btn {
+        @include btnStyle;
+
+        &:hover {
+          @include btnHover;
+        }
+
+        &-submit {
+          background-color: $color-primary;
+          color: white;
+        }
+
+        &-cancel {
+          background-color: transparent;
+          color: white;
+        }
+      }
+    }
+  }
+}
