@@ -1,0 +1,37 @@
+$color-primary: #a300f1;
+$color-primary-light: #d67eff;
+$color-primary-light-1: #a88db4;
+$color-secondary: #270936;
+$color-ternary: #2709365c;
+$color-ternary-light: #760bab5c;
+$color-atract: #beff00;
+$color-atract-1: #d7fe65;
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: $color-primary;
+  border-radius: 1rem;
+
+  &:hover {
+    background-color: $color-primary-light;
+    cursor: pointer;
+  }
+}
+
+@mixin btnStyle {
+  height: 34px;
+  width: 100px;
+  border-radius: 50px;
+  border: 2px solid $color-primary;
+  font-weight: 600;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+@mixin btnHover {
+  transform: translateY(-2px) scale(1.07);
+}
