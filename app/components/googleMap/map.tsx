@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   GoogleMap,
   Marker,
@@ -25,13 +25,45 @@ const Map = ({ storeLocations, center }: locationData) => {
   });
 
   const [selectedStore, setSelectedStore] = useState<any>(null);
+  const [mapStyle, setMapStyle] = useState({
+    width: "580px",
+    height: "530px",
+    borderRadius: "10px",
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 1500) {
+        setMapStyle({
+          width: "700px",
+          height: "530px",
+          borderRadius: "10px",
+        });
+      } else {
+        setMapStyle({
+          width: "580px",
+          height: "530px",
+          borderRadius: "10px",
+        });
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Initial check
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   if (loadError) return <div>Error loading maps</div>;
   if (!isLoaded) return <div>Loading maps...</div>;
   return (
     <>
       <GoogleMap
-        mapContainerStyle={mapContainerStyle}
+        mapContainerStyle={mapStyle}
         zoom={12}
         center={center}
         options={{ disableDefaultUI: true }}
