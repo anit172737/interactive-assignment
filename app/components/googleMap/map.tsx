@@ -10,7 +10,7 @@ import {
 import { outfit } from "../../fonts/font";
 
 const mapContainerStyle = {
-  width: "500px",
+  width: "580px",
   height: "530px",
   borderRadius: "10px",
 };
