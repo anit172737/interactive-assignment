@@ -11,7 +11,8 @@ import { outfit } from "../../fonts/font";
 
 const mapContainerStyle = {
   width: "500px",
-  height: "500px",
+  height: "530px",
+  borderRadius: "10px",
 };
 
 interface locationData {
@@ -27,7 +28,6 @@ const Map = ({ storeLocations, center }: locationData) => {
 
   if (loadError) return <div>Error loading maps</div>;
   if (!isLoaded) return <div>Loading maps...</div>;
-  console.log("storeLocations", storeLocations);
   return (
     <>
       <GoogleMap
