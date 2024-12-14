@@ -39,6 +39,12 @@ const Map = ({ storeLocations, center }: locationData) => {
           height: "530px",
           borderRadius: "10px",
         });
+      } else if (window.innerWidth <= 1100) {
+        setMapStyle({
+          width: "580px",
+          height: "530px",
+          borderRadius: "10px",
+        });
       } else {
         setMapStyle({
           width: "580px",
