@@ -17,6 +17,10 @@
       display: grid;
       gap: 20px;
       height: 100%;
+      align-items: start;
+      height: 100%;
+      grid-template-rows: min-content;
+
       &-top {
         display: grid;
         gap: 20px;
