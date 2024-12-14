@@ -14,11 +14,50 @@
     }
 
     &-left {
+      display: grid;
+      gap: 20px;
+      height: 100%;
       &-top {
         display: grid;
         gap: 20px;
         grid-auto-flow: column;
       }
+
+      &-bottom {
+        display: grid;
+        gap: 10px;
+        background: black;
+        border-radius: 10px;
+        padding: 10px 20px 20px;
+        height: min-content;
+        overflow: auto;
+        max-height: 450px;
+
+        &-card {
+          background: $color-secondary;
+          padding: 4px 10px 10px;
+          border-radius: 10px;
+          height: min-content;
+
+          span {
+            color: $color-atract;
+          }
+
+          p {
+            color: rgb(185, 185, 185);
+          }
+        }
+        &-result {
+          padding: 5px 0px 0px;
+        }
+      }
+    }
+
+    &-right {
+      display: grid;
+      justify-content: center;
+      align-content: center;
+      height: 100%;
     }
   }
 }

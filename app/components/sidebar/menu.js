@@ -1,8 +1,14 @@
-import { Map, Grid } from "react-feather";
+import { Map, Grid, Home } from "react-feather";
 
 export const Menu = [
   {
     url: "/",
+    icon: <Home size={20} />,
+    navName: "Home",
+    dropdown: false,
+  },
+  {
+    url: "/store-locator",
     icon: <Map size={20} />,
     navName: "Store Locator",
     dropdown: false,
