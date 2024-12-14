@@ -1,4 +1,3 @@
-import Locator from "./components/storeLocator/locator";
 import "./globals.css";
 
 export default function Home() {
@@ -7,8 +6,6 @@ export default function Home() {
       <div className="app">
         <h2>Welcome to Interactive Avenue!</h2>
       </div>
-
-      {/* <Locator /> */}
     </>
   );
 }

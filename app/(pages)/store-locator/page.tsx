@@ -9,6 +9,7 @@ import { customStyles } from "@/app/styles/selectStyle";
 import data from "../../components/locatorData/re.json";
 import { Phone } from "react-feather";
 import Map from "@/app/components/googleMap/map";
+import { stateCapitals } from "@/app/utils/utils";
 
 const Locator = () => {
   const [mapData, setMapData] = useState<any>(data);
@@ -107,10 +108,15 @@ const Locator = () => {
       setValue("city", ""); // Reset city when state changes
       setShowrooms([]); // Clear showrooms
       setStoreLocations([]); // Clear map locations
-      setMapCenter({
-        lat: 19.076, // Reset map center to default location
-        lng: 72.8777,
-      });
+      //  Dynamically set map center based on selected state
+      const selectedState = stateWatcher.value.replace(/\s+/g, "");
+      const capitalCoordinates = stateCapitals[selectedState];
+      if (capitalCoordinates) {
+        setMapCenter(capitalCoordinates);
+      } else {
+        // Default to Mumbai if the state is not in the mapping
+        setMapCenter({ lat: 19.076, lng: 72.8777 });
+      }
     }
   }, [stateWatcher]);
 
@@ -127,7 +133,6 @@ const Locator = () => {
     },
   ];
 
-  console.log("showrooms", showrooms);
   return (
     <div className="locator">
       <Header title="Store Locator" />
