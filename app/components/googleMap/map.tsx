@@ -7,22 +7,12 @@ import {
   InfoWindow,
   useLoadScript,
 } from "@react-google-maps/api";
+import { outfit } from "../../fonts/font";
 
 const mapContainerStyle = {
   width: "500px",
   height: "500px",
 };
-
-// const center = {
-//   lat: 19.076, // Mumbai Latitude
-//   lng: 72.8777, // Mumbai Longitude
-// };
-
-// const storeLocations = [
-//   { id: 1, name: "Store 1", lat: 19.049, lng: 72.8777 },
-//   { id: 2, name: "Store 2", lat: 19.07, lng: 72.8777 },
-//   { id: 3, name: "Store 3", lat: 19.016, lng: 72.8777 },
-// ];
 
 interface locationData {
   storeLocations: any;
@@ -66,7 +56,7 @@ const Map = ({ storeLocations, center }: locationData) => {
               }}
               onCloseClick={() => setSelectedStore(null)}
             >
-              <div>
+              <div className={`${outfit.className} locator_content-right-info`}>
                 <h3>{selectedStore?.name}</h3>
                 <p>Latitude: {selectedStore?.lat}</p>
                 <p>Longitude: {selectedStore?.lng}</p>
