@@ -57,11 +57,27 @@ const Locator = () => {
     }));
   }, [city]);
 
+  const getUniqueLocations = (locations: any[]) => {
+    const uniqueLocations = locations.reduce((acc: any[], current) => {
+      const isDuplicate = acc.some(
+        (item) =>
+          item.latitude === current.latitude &&
+          item.longitude === current.longitude
+      );
+      if (!isDuplicate) {
+        acc.push(current);
+      }
+      return acc;
+    }, []);
+    return uniqueLocations;
+  };
+
   useEffect(() => {
     setShowrooms([]);
     if (cityWatcher) {
       const data = cityObj[cityWatcher?.value];
-      setShowrooms(data || []); // Always reset showrooms to new data or empty array
+      const uniqueData = data?.length > 1 ? getUniqueLocations(data) : data;
+      setShowrooms(uniqueData || []); // Always reset showrooms to new data or empty array
     } else {
       setShowrooms([]); // Clear showrooms if no city is selected
     }
