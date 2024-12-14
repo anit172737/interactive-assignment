@@ -10,6 +10,7 @@ import data from "../../components/locatorData/re.json";
 import { Phone } from "react-feather";
 import Map from "@/app/components/googleMap/map";
 import { stateCapitals } from "@/app/utils/utils";
+import { isShopOpen, isTodaySunday } from "@/app/utils/helperFunctions";
 
 const Locator = () => {
   const [mapData, setMapData] = useState<any>(data);
@@ -103,6 +104,8 @@ const Locator = () => {
     }
   }, [showrooms]);
 
+  console.log("showrooms", showrooms);
+
   useEffect(() => {
     if (stateWatcher) {
       setValue("city", ""); // Reset city when state changes
@@ -167,9 +170,20 @@ const Locator = () => {
                   <h2>{showroom.name}</h2>
                   <p>{showroom.averageRating} Rating</p>
                   <p>
-                    <span>Open</span>, closes at{" "}
-                    {showroom.dealerOperationHours.mondayCloseTime} |{" "}
-                    <Phone height={13} color="white" />
+                    <span>
+                      {isTodaySunday() ||
+                      !isShopOpen(
+                        showroom.dealerOperationHours.mondayOpenTime,
+                        showroom.dealerOperationHours.mondayCloseTime
+                      )
+                        ? "Close "
+                        : "Open"}
+                    </span>
+                    {isTodaySunday()
+                      ? ""
+                      : ", closes at" +
+                        showroom.dealerOperationHours.mondayCloseTime}
+                    | <Phone height={13} color="white" />
                     {showroom.phoneNumber}{" "}
                   </p>
                   <p>
