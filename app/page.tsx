@@ -1,6 +1,9 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Locator from "./components/storeLocator/locator";
 
 export default function Home() {
-  return <div>store locator</div>;
+  return (
+    <>
+      <Locator />
+    </>
+  );
 }

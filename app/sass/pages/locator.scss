@@ -1,0 +1,24 @@
+@import "../base";
+
+.locator {
+  @include main;
+
+  &_content {
+    @include content;
+    grid-template-columns: repeat(2, 1fr);
+
+    &-place {
+      justify-content: start;
+      align-content: start;
+      padding-top: 20px !important;
+    }
+
+    &-left {
+      &-top {
+        display: grid;
+        gap: 20px;
+        grid-auto-flow: column;
+      }
+    }
+  }
+}

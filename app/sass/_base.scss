@@ -35,3 +35,20 @@ $color-atract-1: #d7fe65;
 @mixin btnHover {
   transform: translateY(-2px) scale(1.07);
 }
+
+@mixin main {
+  display: grid;
+  grid-template-rows: 80px 1fr;
+  height: 100%;
+}
+
+@mixin content {
+  display: grid;
+  justify-content: center;
+  align-content: start;
+  height: 100%;
+  background-color: $color-ternary;
+  border-radius: 10px;
+  padding: 30px;
+  align-content: center;
+}

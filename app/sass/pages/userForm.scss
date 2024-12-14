@@ -1,19 +1,10 @@
 @import "../base";
 
 .userForm {
-  display: grid;
-  grid-template-rows: 80px 1fr;
-  height: 100%;
+  @include main;
 
   &-content {
-    display: grid;
-    justify-content: center;
-    align-content: start;
-    height: 100%;
-    background-color: $color-ternary;
-    border-radius: 10px;
-    padding: 30px;
-    align-content: center;
+    @include content;
 
     &-form {
       display: grid;
