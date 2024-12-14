@@ -58,11 +58,14 @@ const Locator = () => {
   }, [city]);
 
   useEffect(() => {
+    setShowrooms([]);
     if (cityWatcher) {
       const data = cityObj[cityWatcher?.value];
-      setShowrooms(data || []);
+      setShowrooms(data || []); // Always reset showrooms to new data or empty array
+    } else {
+      setShowrooms([]); // Clear showrooms if no city is selected
     }
-  }, [cityWatcher]);
+  }, [cityWatcher, cityObj]);
 
   useEffect(() => {
     if (showrooms.length !== 0) {
@@ -86,10 +89,10 @@ const Locator = () => {
   useEffect(() => {
     if (stateWatcher) {
       setValue("city", ""); // Reset city when state changes
-      setShowrooms([]);
-      setStoreLocations([]);
+      setShowrooms([]); // Clear showrooms
+      setStoreLocations([]); // Clear map locations
       setMapCenter({
-        lat: 19.076,
+        lat: 19.076, // Reset map center to default location
         lng: 72.8777,
       });
     }
@@ -108,6 +111,7 @@ const Locator = () => {
     },
   ];
 
+  console.log("showrooms", showrooms);
   return (
     <div className="locator">
       <Header title="Store Locator" />
@@ -137,11 +141,8 @@ const Locator = () => {
               <p className="locator_content-left-bottom-result">
                 {showrooms.length} results
               </p>
-              {showrooms.map((showroom: any) => (
-                <div
-                  key={showroom.latitude}
-                  className="locator_content-left-bottom-card"
-                >
+              {showrooms.map((showroom: any, index: number) => (
+                <div key={index} className="locator_content-left-bottom-card">
                   <h2>{showroom.name}</h2>
                   <p>{showroom.averageRating} Rating</p>
                   <p>
