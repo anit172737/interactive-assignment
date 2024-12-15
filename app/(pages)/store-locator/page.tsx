@@ -16,7 +16,7 @@ const Locator = () => {
   const [mapData, setMapData] = useState<any>(data);
   const [isClient, setIsClient] = useState<boolean>(false);
   const [cityObj, setCityObj] = useState<any>({});
-  const [showrooms, setShowrooms] = useState<any>([]);
+  const [stores, setStores] = useState<any>([]);
   const [storeLocations, setStoreLocations] = useState<any>([]);
   const [mapCenter, setMapCenter] = useState<any>({
     lat: 19.076,
@@ -30,11 +30,15 @@ const Locator = () => {
     formState: { errors },
   } = useForm({ mode: "onChange" });
 
+  //watchers
   const stateWatcher = watch("state");
   const cityWatcher = watch("city");
 
+  //cityStateMap
   const obj = mapData["cityStateMap"];
+  //keys of cityStateMap
   const stateKeys = Object.keys(obj);
+  //state options
   const stateOptions =
     stateKeys &&
     stateKeys.map((key: any) => ({
@@ -42,6 +46,7 @@ const Locator = () => {
       value: key,
     }));
 
+  //array of city names and city values
   const city = useMemo(() => {
     if (stateWatcher) {
       const objForState = obj[stateWatcher?.value];
@@ -53,6 +58,7 @@ const Locator = () => {
     return [];
   }, [stateWatcher]);
 
+  //city options
   const cityOptions = useMemo(() => {
     return city?.[0]?.map((key: any) => ({
       label: key,
@@ -60,6 +66,7 @@ const Locator = () => {
     }));
   }, [city]);
 
+  //fieldArray for form
   const fieldArray: any = [
     {
       name: "state",
@@ -73,6 +80,7 @@ const Locator = () => {
     },
   ];
 
+  //remove duplicate values from locations
   const getUniqueLocations = (locations: any[]) => {
     const uniqueLocations = locations.reduce((acc: any[], current) => {
       const isDuplicate = acc.some(
@@ -88,40 +96,42 @@ const Locator = () => {
     return uniqueLocations;
   };
 
+  //Set stores after city change
   useEffect(() => {
-    setShowrooms([]);
     if (cityWatcher) {
       const data = cityObj[cityWatcher?.value];
       const uniqueData = data?.length > 1 ? getUniqueLocations(data) : data;
-      setShowrooms(uniqueData || []); // Always reset showrooms to new data or empty array
+      setStores(uniqueData || []); // Always reset stores to new data or empty array
     } else {
-      setShowrooms([]); // Clear showrooms if no city is selected
+      setStores([]); // Clear stores if no city is selected
     }
   }, [cityWatcher, cityObj]);
 
+  //Set store locations and map center
   useEffect(() => {
-    if (showrooms.length !== 0) {
-      const locationData = showrooms.map((showroom: any, index: any) => ({
+    if (stores.length !== 0) {
+      const locationData = stores.map((store: any, index: any) => ({
         id: index + 1,
-        name: showroom.name,
-        lat: Number(showroom.latitude),
-        lng: Number(showroom.longitude),
+        name: store.name,
+        lat: Number(store.latitude),
+        lng: Number(store.longitude),
       }));
 
       setStoreLocations(locationData);
 
-      // Set map center to the first showroom's location
+      // Set map center to the first store's location
       setMapCenter({
         lat: locationData[0]?.lat || mapCenter.lat,
         lng: locationData[0]?.lng || mapCenter.lng,
       });
     }
-  }, [showrooms]);
+  }, [stores]);
 
+  //update values on state change
   useEffect(() => {
     if (stateWatcher) {
       setValue("city", ""); // Reset city when state changes
-      setShowrooms([]); // Clear showrooms
+      setStores([]); // Clear stores
       setStoreLocations([]); // Clear map locations
       //  Dynamically set map center based on selected state
       const selectedState = stateWatcher.value.replace(/\s+/g, "");
@@ -135,6 +145,7 @@ const Locator = () => {
     }
   }, [stateWatcher]);
 
+  //prevent pre-rendering
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -166,21 +177,21 @@ const Locator = () => {
             </div>
           )}
 
-          {showrooms.length > 0 && (
+          {stores.length > 0 && (
             <div className="locator_content-left-bottom">
               <p className="locator_content-left-bottom-result">
-                {showrooms.length} results
+                {stores.length} results
               </p>
-              {showrooms.map((showroom: any, index: number) => (
+              {stores.map((store: any, index: number) => (
                 <div key={index} className="locator_content-left-bottom-card">
-                  <h2>{showroom.name}</h2>
-                  <p>{showroom.averageRating} Rating</p>
+                  <h2>{store.name}</h2>
+                  <p>{store.averageRating} Rating</p>
                   <p>
                     <span>
                       {isTodaySunday() ||
                       !isShopOpen(
-                        showroom.dealerOperationHours.mondayOpenTime,
-                        showroom.dealerOperationHours.mondayCloseTime
+                        store.dealerOperationHours.mondayOpenTime,
+                        store.dealerOperationHours.mondayCloseTime
                       )
                         ? "Close "
                         : "Open"}
@@ -188,13 +199,13 @@ const Locator = () => {
                     {isTodaySunday()
                       ? ""
                       : ", closes at" +
-                        showroom.dealerOperationHours.mondayCloseTime}
+                        store.dealerOperationHours.mondayCloseTime}
                     | <Phone height={13} color="white" />
-                    {showroom.phoneNumber}{" "}
+                    {store.phoneNumber}{" "}
                   </p>
                   <p>
-                    {showroom.address}, {showroom.city}, {showroom.state} -{" "}
-                    {showroom.pincode}
+                    {store.address}, {store.city}, {store.state} -{" "}
+                    {store.pincode}
                   </p>
                 </div>
               ))}
