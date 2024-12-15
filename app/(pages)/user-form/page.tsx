@@ -132,6 +132,13 @@ const UserForm = () => {
     setValue("message", "");
   };
 
+  const handleReset = () => {
+    setValue("name", "");
+    setValue("email", "");
+    setValue("phoneNumber", "");
+    setValue("message", "");
+  };
+
   return (
     <div className="userForm">
       <Header title="User Form" />
@@ -203,7 +210,7 @@ const UserForm = () => {
             </button>
             <button
               className="userForm-content-footer-btn userForm-content-footer-btn-cancel"
-              onClick={() => reset()}
+              onClick={handleReset}
             >
               Reset
             </button>
