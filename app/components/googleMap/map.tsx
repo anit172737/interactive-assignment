@@ -9,19 +9,13 @@ import {
 } from "@react-google-maps/api";
 import { outfit } from "../../fonts/font";
 
-const mapContainerStyle = {
-  width: "580px",
-  height: "530px",
-  borderRadius: "10px",
-};
-
 interface locationData {
   storeLocations: any;
   center: any;
 }
 const Map = ({ storeLocations, center }: locationData) => {
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "AIzaSyBbDv_cdmNkb7H9lN9CEMLJzTi0dhsX8a8", // Replace with your Google Maps API key
+    googleMapsApiKey: "AIzaSyBbDv_cdmNkb7H9lN9CEMLJzTi0dhsX8a8",
   });
 
   const [selectedStore, setSelectedStore] = useState<any>(null);
