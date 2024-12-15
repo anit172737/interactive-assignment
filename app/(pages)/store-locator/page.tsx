@@ -14,6 +14,7 @@ import { isShopOpen, isTodaySunday } from "@/app/utils/helperFunctions";
 
 const Locator = () => {
   const [mapData, setMapData] = useState<any>(data);
+  const [isClient, setIsClient] = useState<boolean>(false);
   const [cityObj, setCityObj] = useState<any>({});
   const [showrooms, setShowrooms] = useState<any>([]);
   const [storeLocations, setStoreLocations] = useState<any>([]);
@@ -58,6 +59,19 @@ const Locator = () => {
       value: key,
     }));
   }, [city]);
+
+  const fieldArray: any = [
+    {
+      name: "state",
+      title: "Select State",
+      options: stateOptions || [],
+    },
+    {
+      name: "city",
+      title: "Select City",
+      options: cityOptions || [],
+    },
+  ];
 
   const getUniqueLocations = (locations: any[]) => {
     const uniqueLocations = locations.reduce((acc: any[], current) => {
@@ -104,8 +118,6 @@ const Locator = () => {
     }
   }, [showrooms]);
 
-  console.log("showrooms", showrooms);
-
   useEffect(() => {
     if (stateWatcher) {
       setValue("city", ""); // Reset city when state changes
@@ -123,43 +135,37 @@ const Locator = () => {
     }
   }, [stateWatcher]);
 
-  const fieldArray: any = [
-    {
-      name: "state",
-      title: "Select State",
-      options: stateOptions || [],
-    },
-    {
-      name: "city",
-      title: "Select City",
-      options: cityOptions || [],
-    },
-  ];
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   return (
     <div className="locator">
       <Header title="Store Locator" />
       <div className="locator_content locator_content-place">
         <div className="locator_content-left">
-          <div className="locator_content-left-top">
-            {fieldArray.map((item: any) => (
-              <div key={item.name} className="profit-top-select">
-                <label htmlFor={item.name}>{item.title} :</label>
-                <Controller
-                  name={item.name}
-                  control={control}
-                  rules={{ required: "This field is required" }}
-                  render={({ field }) => (
-                    <Select
-                      styles={customStyles}
-                      options={item.options}
-                      {...field}
-                    />
-                  )}
-                />
-              </div>
-            ))}
-          </div>
+          {isClient && (
+            <div className="locator_content-left-top">
+              {fieldArray.map((item: any) => (
+                <div key={item.name} className="profit-top-select">
+                  <label htmlFor={item.name}>{item.title} :</label>
+                  <Controller
+                    name={item.name}
+                    control={control}
+                    rules={{ required: "This field is required" }}
+                    render={({ field }) => (
+                      <Select
+                        styles={customStyles}
+                        options={item.options}
+                        {...field}
+                      />
+                    )}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+
           {showrooms.length > 0 && (
             <div className="locator_content-left-bottom">
               <p className="locator_content-left-bottom-result">
