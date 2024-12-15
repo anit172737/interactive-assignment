@@ -15,9 +15,10 @@ interface locationData {
 }
 const Map = ({ storeLocations, center }: locationData) => {
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "AIzaSyBbDv_cdmNkb7H9lN9CEMLJzTi0dhsX8a8",
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY || "",
   });
 
+  console.log("first", process.env.NEXT_PUBLIC_GOOGLE_API_KEY);
   const [selectedStore, setSelectedStore] = useState<any>(null);
   const [mapStyle, setMapStyle] = useState({
     width: "580px",
