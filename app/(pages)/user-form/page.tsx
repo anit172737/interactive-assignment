@@ -121,8 +121,8 @@ const UserForm = () => {
   ];
   const onSubmit = async (data: any) => {
     const { name, email, phoneNumber, message } = data;
-    const string = `Name : ${name.trim()},\nEmail : ${email.trim()},\nPhone Number : ${phoneNumber.trim()}${
-      message ? `,\nMessage : ${message.trim()}` : ""
+    const string = `Name : ${name.trim()}\nEmail : ${email.trim()}\nPhone Number : ${phoneNumber.trim()}${
+      message ? `\nMessage : ${message.trim()}` : ""
     }`;
     await alert(string);
 
