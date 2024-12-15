@@ -182,7 +182,7 @@ const Locator = () => {
           {stores.length > 0 && (
             <div className="locator_content-left-bottom">
               <p className="locator_content-left-bottom-result">
-                {stores.length} results
+                {stores.length} {stores.length < 2 ? "result" : "results"}
               </p>
               {stores.map((store: any, index: number) => (
                 <div key={index} className="locator_content-left-bottom-card">
