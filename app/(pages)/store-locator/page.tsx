@@ -155,7 +155,7 @@ const Locator = () => {
       <Header title="Store Locator" />
       <div className="locator_content locator_content-place">
         <div className="locator_content-left">
-          {isClient && (
+          {isClient ? (
             <div className="locator_content-left-top">
               {fieldArray.map((item: any) => (
                 <div key={item.name} className="profit-top-select">
@@ -175,6 +175,8 @@ const Locator = () => {
                 </div>
               ))}
             </div>
+          ) : (
+            "Loading states and cities..."
           )}
 
           {stores.length > 0 && (
