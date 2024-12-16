@@ -200,8 +200,9 @@ const Locator = () => {
                     </span>
                     {isTodaySunday()
                       ? ""
-                      : ", closes at" +
-                        store.dealerOperationHours.mondayCloseTime}
+                      : ", closes at " +
+                        store.dealerOperationHours.mondayCloseTime +
+                        " "}
                     | <Phone height={13} color="white" />
                     {store.phoneNumber}{" "}
                   </p>
